@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {Link, useParams} from "react-router-dom"
+import { useNavigate, useParams} from "react-router-dom"
 import axios from 'axios';
 
 export default function CardDetails() {
 const [details, setDetails] = useState(null);
 let {id} = useParams();
+let navigate = useNavigate();
 
 useEffect(() => {
   axios
@@ -24,12 +25,7 @@ useEffect(() => {
 
     return (
       <div>
-      <div className="flex justify-end">
-        <nav className=" mr-10 text-xl text-primaryBlue bg-primaryYellow border-2 p-2 rounded-xl w-36">
-          <Link to="/">Go Back</Link>
-        </nav>
-      </div>
-      <div className="flex flex-col justify-around -mt-20 mb-8">
+      <div className="flex flex-col justify-around -mt-10 mb-2">
         <img src={`https://robohash.org/${name}`} alt="avatar" className="w-96 self-center" />
         <div className="text-primaryWhite p-8 text-center text-m bg-primaryBlue border-2 w-1/3  min-w-[350px] rounded-lg shadow-inner self-center">
           <h1 className='text-2xl m-5'>{name}</h1>
@@ -38,7 +34,12 @@ useEffect(() => {
           <p>{phone}</p>
           <p>{website}</p>
         </div>
-        </div>
+      </div>
+      <div onClick={(() => {navigate('/')})} className="flex justify-end p-0 z-20">
+          <nav className="mr-10 text-xl text-primaryBlue bg-primaryYellow border-2 py-2 rounded-xl w-36">
+          Go Back
+          </nav>
+      </div>
      </div>
     )
   }
